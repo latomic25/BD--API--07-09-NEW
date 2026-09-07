@@ -11,10 +11,6 @@ app = FastAPI()
 def startup():
     initDb()
 
-@app.get("/")
-def root():
-    return "Hola desde FastAPI"
-
 @app.post("/agregar_estudiante")
 def agregarEstudiante(estudiante: Estudiante, conexion: sqlite3.Connection = Depends(getConexion)):
     return manager_estudiante.post_estudiante(estudiante,conexion)
@@ -25,7 +21,7 @@ def leerEstudiantes(conexion: sqlite3.Connection = Depends(getConexion)):
 
 @app.delete("/eliminar_estudiante/{id}")
 def eliminarEstudiante(id: int, conexion: sqlite3.Connection = Depends(getConexion)):
-    return manager_estudiante.delete_estudiante(conexion)
+    return manager_estudiante.delete_estudiante(conexion,id)
 
 @app.put("/actualizar_estudiante/{id}")
 def actualizarEstudiante(nombre:str,id: int, conexion: sqlite3.Connection = Depends(getConexion)):

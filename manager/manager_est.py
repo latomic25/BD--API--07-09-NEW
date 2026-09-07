@@ -13,7 +13,7 @@ class manager_estudiante:
         res = conexion.execute("SELECT * FROM estudiantes").fetchall()
         return [dict(item) for item in res]
 
-    def delete_estudiante(self,conexion):
+    def delete_estudiante(self,conexion, id):
         conexion.execute("DELETE FROM estudiantes WHERE id = ?",(id,))
         return "Estudiante eliminado!"
 
